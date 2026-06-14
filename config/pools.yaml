@@ -1,0 +1,37 @@
+# Pool definitions
+pools:
+  # KawPow (Ravencoin)
+  kawpow:
+    primary:
+      url: "stratum+tcp://rvn.2miners.com:6060"
+      algorithm: "kawpow"
+    failover:
+      - url: "stratum+tcp://stratum.ravenminer.com:3838"
+        algorithm: "kawpow"
+
+  # Ethash (Ethereum Classic)
+  ethash:
+    primary:
+      url: "stratum+tcp://etc.2miners.com:1010"
+      algorithm: "ethash"
+    failover:
+      - url: "stratum+tcp://etc.poolbinance.com:4444"
+        algorithm: "ethash"
+
+  # RandomX (Monero)
+  randomx:
+    primary:
+      url: "stratum+tcp://xmr.2miners.com:1111"
+      algorithm: "randomx"
+    failover:
+      - url: "stratum+tcp://pool.hashvault.pro:443"
+        algorithm: "randomx"
+
+  # Equihash (Zcash)
+  equihash:
+    primary:
+      url: "stratum+tcp://zec.2miners.com:1010"
+      algorithm: "equihash"
+    failover:
+      - url: "stratum+tcp://zec.poolbinance.com:4444"
+        algorithm: "equihash"

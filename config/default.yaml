@@ -1,0 +1,38 @@
+# GPU Compute Engine Configuration
+# Documentation: https://github.com/ozihatake77/gpu-compute-engine
+
+miner:
+  wallet: "YOUR_WALLET_ADDRESS"
+  worker: "rig-01"
+  algorithms:
+    - kawpow
+    - ethash
+    - randomx
+
+gpu:
+  devices: [0]           # GPU device IDs (-1 for all)
+  power_limit: 250       # Watts
+  temp_limit: 85         # Celsius max
+  fan_curve: "auto"      # auto, aggressive, manual
+  auto_tune: true
+
+pools:
+  primary:
+    url: "stratum+tcp://pool.example.com:3636"
+    algorithm: "kawpow"
+  failover:
+    - url: "stratum+tcp://backup.pool.com:3636"
+      algorithm: "kawpow"
+
+monitoring:
+  dashboard_port: 8080
+  api_port: 8081
+  prometheus_port: 9090
+  telegram:
+    enabled: false
+    bot_token: "${TELEGRAM_BOT_TOKEN}"
+    chat_id: "${TELEGRAM_CHAT_ID}"
+
+logging:
+  level: "INFO"
+  file: "logs/miner.log"

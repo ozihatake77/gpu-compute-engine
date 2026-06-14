@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  miner:
+    build: .
+    container_name: gpu-compute-engine
+    restart: unless-stopped
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+    ports:
+      - "8080:8080"  # Dashboard
+      - "8081:8081"  # API
+      - "9090:9090"  # Prometheus
+    volumes:
+      - ./config:/app/config
+      - ./logs:/app/logs
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
